@@ -1,0 +1,20 @@
+sql: SELECT * FROM Customers;
+Customers.findAll();
+
+sql:SELECT CustomerName, City FROM Customers;
+Customers.findAll({
+    attributes:[CustomerName,City]
+})
+
+
+sql : SELECT DISTINCT Country FROM Customers;
+Customers.findAll({
+    attributes: [
+        [Sequelize.fn('DISTINCT', Sequelize.col('country')) ,'country'],
+    ]
+});
+
+sql:SELECT COUNT(DISTINCT Country) FROM Customers;
+Customers.count({
+        distinct: 'id' // since count is applied on Product model and distinct is directly passed to its object so Product.id will be selected
+    });
